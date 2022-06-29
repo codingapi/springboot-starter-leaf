@@ -1,6 +1,6 @@
 package com.example.demo.domain;
 
-import com.codingapi.leaf.framework.LeafUtils;
+import com.codingapi.leaf.framework.LeafIdGenerate;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,19 +10,14 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-public class Demo {
+public class Demo implements LeafIdGenerate {
 
     private long id;
 
     private String name;
 
-
     public Demo() {
-        this.generatedId();
+        id = generateId();
     }
 
-
-    private void generatedId(){
-        this.id = LeafUtils.getInstance().generateId(Demo.class);
-    }
 }

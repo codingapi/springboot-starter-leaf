@@ -1,5 +1,6 @@
 package com.codingapi.leaf.framework;
 
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Set;
@@ -13,6 +14,8 @@ public class LeafUtils {
 
     private LeafClient leafClient;
     private String type;
+    @Setter
+    private Set<Class<? extends LeafIdGenerate>> classes;
 
     private LeafUtils(){
     }
@@ -33,6 +36,7 @@ public class LeafUtils {
     protected void setLeafClient(LeafClient leafClient){
         this.leafClient = leafClient;
         this.type = leafClient.type();
+        this.initClass();
     }
 
     boolean isSegment(){
@@ -76,7 +80,7 @@ public class LeafUtils {
     }
 
 
-    void initClass(Set<Class> classes){
+    private void initClass(){
         if(LeafUtils.getInstance().isSegment()) {
             if(classes!=null&&classes.size()>0) {
                 for (Class<?> clazz : classes) {

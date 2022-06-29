@@ -8,8 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author lorne
  * @since 1.0.0
  */
-@SpringBootApplication
 @LeafScanner
+@SpringBootApplication
 public class DemoApplication {
 
     public static void main(String[] args) {
