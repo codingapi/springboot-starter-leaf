@@ -2,6 +2,8 @@ package com.codingapi.leaf.framework;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Set;
+
 /**
  * @author lorne
  * @since 1.0.0
@@ -10,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 public class LeafUtils {
 
     private LeafClient leafClient;
+    private String type;
 
     private LeafUtils(){
     }
@@ -29,40 +32,64 @@ public class LeafUtils {
 
     protected void setLeafClient(LeafClient leafClient){
         this.leafClient = leafClient;
+        this.type = leafClient.type();
     }
 
-    public long segmentGetId(Class<?> clazz){
+    boolean isSegment(){
+        return "SEGMENT".equalsIgnoreCase(type);
+    }
+
+    boolean isSnowflake(){
+        return "SNOWFLAKE".equalsIgnoreCase(type);
+    }
+
+    public long generateId(Class<?> clazz){
+        if(isSegment()){
+            return segmentGetId(clazz);
+        }
+        if(isSnowflake()){
+            return snowflakeGetId(clazz);
+        }
+        throw new RuntimeException("springboot init finish then to running.");
+    }
+
+    private long segmentGetId(Class<?> clazz){
         if(leafClient==null){
             throw new RuntimeException("springboot init finish then to running.");
         }
         return leafClient.segmentGetId(clazz.getName());
     }
 
-    public long snowflakeGetId(Class<?> clazz){
+    private long snowflakeGetId(Class<?> clazz){
         if(leafClient==null){
             throw new RuntimeException("springboot init finish then to running.");
         }
         return leafClient.snowflakeGetId(clazz.getName());
     }
 
-    public long segmentGetId(String key){
-        if(leafClient==null){
-            throw new RuntimeException("springboot init finish then to running.");
-        }
-        return leafClient.segmentGetId(key);
-    }
 
-    public long snowflakeGetId(String key){
-        if(leafClient==null){
-            throw new RuntimeException("springboot init finish then to running.");
-        }
-        return leafClient.snowflakeGetId(key);
-    }
-
-    public boolean push(String key,int step,int maxId){
+     boolean push(String key,int step,int maxId){
         if(leafClient==null){
             throw new RuntimeException("springboot init finish then to running.");
         }
         return leafClient.segmentPush(key,step,maxId);
     }
+
+
+    void initClass(Set<Class> classes){
+        if(LeafUtils.getInstance().isSegment()) {
+            if(classes!=null&&classes.size()>0) {
+                for (Class<?> clazz : classes) {
+                    try {
+                        LeafUtils.getInstance().push(clazz.getName(), 2000, 1);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+
+        log.info("leaf init finish.");
+    }
+
 }

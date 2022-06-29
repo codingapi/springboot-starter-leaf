@@ -8,7 +8,6 @@ import com.sankuai.inf.leaf.server.exception.LeafServerException;
 import com.sankuai.inf.leaf.server.exception.NoKeyException;
 import com.sankuai.inf.leaf.server.segment.model.LeafAlloc;
 import com.sankuai.inf.leaf.server.service.SegmentService;
-import com.sankuai.inf.leaf.server.service.SnowflakeService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

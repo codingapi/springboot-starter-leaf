@@ -10,6 +10,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author lorne
@@ -41,6 +42,13 @@ public class LeafClient {
         return Long.parseLong(res);
     }
 
+    public String type(){
+        String url = String.format("%s%s",leafProperty.getUrl(),"api/type");
+        String res = restTemplate.getForObject(url,String.class);
+        assert res != null;
+        return res;
+    }
+
     /**
      * 数据库模式添加 数据
      * @param key   key 关键字
@@ -64,37 +72,6 @@ public class LeafClient {
 
     public void init(){
         LeafUtils.getInstance().setLeafClient(this);
-        this.initKeys();
-        this.initClasses();
-
-        log.info("leaf init finish.");
     }
-
-    private void initKeys(){
-        String[] keys =  leafProperty.getKeys();
-        if(keys!=null&&keys.length>0) {
-            for (String key : keys) {
-                try {
-                    LeafUtils.getInstance().push(key, 2000, 1);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    private void initClasses(){
-        Class<?>[] classes =  leafProperty.getClasses();
-        if(classes!=null&&classes.length>0) {
-            for (Class<?> clazz : classes) {
-                try {
-                    LeafUtils.getInstance().push(clazz.getName(), 2000, 1);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
 
 }

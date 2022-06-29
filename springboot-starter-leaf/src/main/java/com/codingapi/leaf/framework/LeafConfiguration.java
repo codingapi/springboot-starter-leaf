@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 public class LeafConfiguration {
 
     @Bean
-    @ConfigurationProperties(prefix = "laiease.leaf-properties")
+    @ConfigurationProperties(prefix = "codingapi.leaf-properties")
     public LeafProperty leafProperty(){
         return new LeafProperty();
     }

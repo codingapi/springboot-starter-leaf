@@ -1,6 +1,5 @@
 package com.example.demo.domain;
 
-import com.codingapi.leaf.framework.Leaf;
 import com.codingapi.leaf.framework.LeafUtils;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +10,6 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-@Leaf
 public class Example {
 
     private long id;
@@ -25,6 +23,6 @@ public class Example {
 
 
     private void generatedId(){
-        this.id = LeafUtils.getInstance().segmentGetId(Example.class);
+        this.id = LeafUtils.getInstance().generateId(Example.class);
     }
 }
