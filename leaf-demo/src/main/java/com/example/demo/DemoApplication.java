@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import com.codingapi.leaf.framework.LeafScanner;
+import com.codingapi.leaf.framework.LeafAutoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author lorne
  * @since 1.0.0
  */
-@LeafScanner
+@LeafAutoConfiguration
 @SpringBootApplication
 public class DemoApplication {
 

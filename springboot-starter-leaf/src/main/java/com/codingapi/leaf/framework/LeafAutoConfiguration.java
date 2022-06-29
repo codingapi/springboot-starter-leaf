@@ -8,7 +8,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Import(AutoConfigurationImportSelector.class)
-public @interface LeafScanner {
+public @interface LeafAutoConfiguration {
 
     String[] scanBasePackages() default {};
 
