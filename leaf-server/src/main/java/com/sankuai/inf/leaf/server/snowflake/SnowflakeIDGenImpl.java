@@ -1,10 +1,10 @@
-package com.sankuai.inf.leaf.snowflake;
+package com.sankuai.inf.leaf.server.snowflake;
 
 import com.google.common.base.Preconditions;
-import com.sankuai.inf.leaf.IDGen;
-import com.sankuai.inf.leaf.common.Result;
-import com.sankuai.inf.leaf.common.Status;
-import com.sankuai.inf.leaf.common.Utils;
+import com.sankuai.inf.leaf.server.IDGen;
+import com.sankuai.inf.leaf.server.common.Result;
+import com.sankuai.inf.leaf.server.common.Status;
+import com.sankuai.inf.leaf.server.common.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

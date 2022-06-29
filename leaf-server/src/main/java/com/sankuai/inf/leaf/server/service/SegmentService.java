@@ -1,55 +1,33 @@
 package com.sankuai.inf.leaf.server.service;
 
-import com.alibaba.druid.pool.DruidDataSource;
-import com.sankuai.inf.leaf.IDGen;
-import com.sankuai.inf.leaf.common.PropertyFactory;
-import com.sankuai.inf.leaf.common.Result;
-import com.sankuai.inf.leaf.common.ZeroIDGen;
-import com.sankuai.inf.leaf.segment.SegmentIDGenImpl;
-import com.sankuai.inf.leaf.segment.dao.IDAllocDao;
-import com.sankuai.inf.leaf.segment.dao.impl.IDAllocDaoImpl;
-import com.sankuai.inf.leaf.segment.model.LeafAlloc;
 import com.sankuai.inf.leaf.server.Constants;
+import com.sankuai.inf.leaf.server.IDGen;
+import com.sankuai.inf.leaf.server.common.Result;
 import com.sankuai.inf.leaf.server.exception.InitException;
+import com.sankuai.inf.leaf.server.segment.SegmentIDGenImpl;
+import com.sankuai.inf.leaf.server.segment.dao.IDAllocDao;
+import com.sankuai.inf.leaf.server.segment.model.LeafAlloc;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
-
-import java.sql.SQLException;
-import java.util.Properties;
 
 @Slf4j
 @Service("SegmentService")
+@ConditionalOnProperty(name = Constants.LEAF_SEGMENT_ENABLE,havingValue = "true")
 public class SegmentService {
 
     private final IDGen idGen;
 
-    private IDAllocDao dao;
+    private final IDAllocDao dao;
 
-    public SegmentService() throws SQLException, InitException {
-        Properties properties = PropertyFactory.getProperties();
-        boolean flag = Boolean.parseBoolean(properties.getProperty(Constants.LEAF_SEGMENT_ENABLE, "true"));
-        if (flag) {
-            // Config dataSource
-            DruidDataSource dataSource = new DruidDataSource();
-            dataSource.setUrl(properties.getProperty(Constants.LEAF_JDBC_URL));
-            dataSource.setUsername(properties.getProperty(Constants.LEAF_JDBC_USERNAME));
-            dataSource.setPassword(properties.getProperty(Constants.LEAF_JDBC_PASSWORD));
-            dataSource.setDriverClassName(properties.getProperty(Constants.LEAF_JDBC_DRIVER));
-            dataSource.init();
-
-            // Config Dao
-            dao = new IDAllocDaoImpl(dataSource);
-
-            // Config ID Gen
-            idGen = new SegmentIDGenImpl(dao);
-            if (idGen.init()) {
-                log.info("Segment Service Init Successfully");
-            } else {
-                throw new InitException("Segment Service Init Fail");
-            }
+    public SegmentService(IDAllocDao dao) throws InitException {
+        this.dao = dao;
+        // Config ID Gen
+        idGen = new SegmentIDGenImpl(dao);
+        if (idGen.init()) {
+            log.info("Segment Service Init Successfully");
         } else {
-            idGen = new ZeroIDGen();
-            log.info("Zero ID Gen Service Init Successfully");
+            throw new InitException("Segment Service Init Fail");
         }
     }
 

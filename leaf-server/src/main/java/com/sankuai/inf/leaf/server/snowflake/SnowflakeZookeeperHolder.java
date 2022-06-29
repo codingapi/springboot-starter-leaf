@@ -1,10 +1,10 @@
-package com.sankuai.inf.leaf.snowflake;
+package com.sankuai.inf.leaf.server.snowflake;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Maps;
-import com.sankuai.inf.leaf.common.PropertyFactory;
-import com.sankuai.inf.leaf.snowflake.exception.CheckLastTimeException;
+import com.sankuai.inf.leaf.server.common.PropertyFactory;
+import com.sankuai.inf.leaf.server.snowflake.exception.CheckLastTimeException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

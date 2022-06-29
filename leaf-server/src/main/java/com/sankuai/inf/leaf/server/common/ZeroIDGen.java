@@ -1,6 +1,6 @@
-package com.sankuai.inf.leaf.common;
+package com.sankuai.inf.leaf.server.common;
 
-import com.sankuai.inf.leaf.IDGen;
+import com.sankuai.inf.leaf.server.IDGen;
 
 public class ZeroIDGen implements IDGen {
 

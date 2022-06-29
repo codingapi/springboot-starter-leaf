@@ -1,4 +1,4 @@
-package com.sankuai.inf.leaf.snowflake.exception;
+package com.sankuai.inf.leaf.server.snowflake.exception;
 
 public class CheckLastTimeException extends RuntimeException {
 

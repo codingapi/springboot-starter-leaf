@@ -1,6 +1,6 @@
-package com.sankuai.inf.leaf.segment.dao;
+package com.sankuai.inf.leaf.server.segment.dao;
 
-import com.sankuai.inf.leaf.segment.model.LeafAlloc;
+import com.sankuai.inf.leaf.server.segment.model.LeafAlloc;
 
 import java.util.List;
 

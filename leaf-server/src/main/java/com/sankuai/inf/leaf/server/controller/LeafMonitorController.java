@@ -1,20 +1,18 @@
 package com.sankuai.inf.leaf.server.controller;
 
-import com.sankuai.inf.leaf.segment.SegmentIDGenImpl;
-import com.sankuai.inf.leaf.segment.model.LeafAlloc;
-import com.sankuai.inf.leaf.segment.model.SegmentBuffer;
+import com.sankuai.inf.leaf.server.Constants;
 import com.sankuai.inf.leaf.server.model.SegmentBufferView;
+import com.sankuai.inf.leaf.server.segment.SegmentIDGenImpl;
+import com.sankuai.inf.leaf.server.segment.model.LeafAlloc;
+import com.sankuai.inf.leaf.server.segment.model.SegmentBuffer;
 import com.sankuai.inf.leaf.server.service.SegmentService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +20,7 @@ import java.util.Map;
 @Slf4j
 @Controller
 @AllArgsConstructor
+@ConditionalOnProperty(name = Constants.LEAF_SEGMENT_ENABLE,havingValue = "true")
 public class LeafMonitorController {
 
     private final SegmentService segmentService;
@@ -69,34 +68,5 @@ public class LeafMonitorController {
         return "db";
     }
 
-    /**
-     * the output is like this:
-     * {
-     *   "timestamp": "1567733700834(2019-09-06 09:35:00.834)",
-     *   "sequenceId": "3448",
-     *   "workerId": "39"
-     * }
-     */
-    @RequestMapping(value = "decodeSnowflakeId")
-    @ResponseBody
-    public Map<String, String> decodeSnowflakeId(@RequestParam("snowflakeId") String snowflakeIdStr) {
-        Map<String, String> map = new HashMap<>();
-        try {
-            long snowflakeId = Long.parseLong(snowflakeIdStr);
 
-            long originTimestamp = (snowflakeId >> 22) + 1288834974657L;
-            Date date = new Date(originTimestamp);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-            map.put("timestamp", String.valueOf(originTimestamp) + "(" + sdf.format(date) + ")");
-
-            long workerId = (snowflakeId >> 12) ^ (snowflakeId >> 22 << 10);
-            map.put("workerId", String.valueOf(workerId));
-
-            long sequence = snowflakeId ^ (snowflakeId >> 12 << 12);
-            map.put("sequenceId", String.valueOf(sequence));
-        } catch (NumberFormatException e) {
-            map.put("errorMsg", "snowflake Id反解析发生异常!");
-        }
-        return map;
-    }
 }

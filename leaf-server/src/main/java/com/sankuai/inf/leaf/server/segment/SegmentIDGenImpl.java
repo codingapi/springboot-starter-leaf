@@ -1,12 +1,12 @@
-package com.sankuai.inf.leaf.segment;
+package com.sankuai.inf.leaf.server.segment;
 
-import com.sankuai.inf.leaf.IDGen;
-import com.sankuai.inf.leaf.common.Result;
-import com.sankuai.inf.leaf.common.Status;
-import com.sankuai.inf.leaf.segment.dao.IDAllocDao;
-import com.sankuai.inf.leaf.segment.model.LeafAlloc;
-import com.sankuai.inf.leaf.segment.model.Segment;
-import com.sankuai.inf.leaf.segment.model.SegmentBuffer;
+import com.sankuai.inf.leaf.server.IDGen;
+import com.sankuai.inf.leaf.server.common.Result;
+import com.sankuai.inf.leaf.server.common.Status;
+import com.sankuai.inf.leaf.server.segment.dao.IDAllocDao;
+import com.sankuai.inf.leaf.server.segment.model.LeafAlloc;
+import com.sankuai.inf.leaf.server.segment.model.Segment;
+import com.sankuai.inf.leaf.server.segment.model.SegmentBuffer;
 import lombok.extern.slf4j.Slf4j;
 import org.perf4j.StopWatch;
 import org.perf4j.slf4j.Slf4JStopWatch;

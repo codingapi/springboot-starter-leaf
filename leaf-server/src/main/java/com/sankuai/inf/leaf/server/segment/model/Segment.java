@@ -1,4 +1,4 @@
-package com.sankuai.inf.leaf.segment.model;
+package com.sankuai.inf.leaf.server.segment.model;
 
 import lombok.Getter;
 import lombok.Setter;
