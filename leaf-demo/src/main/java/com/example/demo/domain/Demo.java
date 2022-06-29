@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+import com.codingapi.leaf.framework.Leaf;
 import com.codingapi.leaf.framework.LeafUtils;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,6 +11,7 @@ import lombok.Setter;
  */
 @Setter
 @Getter
+@Leaf
 public class Demo {
 
     private long id;
