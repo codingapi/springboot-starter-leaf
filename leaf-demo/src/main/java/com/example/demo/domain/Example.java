@@ -17,7 +17,7 @@ public class Example  implements LeafIdGenerate {
     private String name;
 
     public Example() {
-        id = generateId();
+        id = this.generateLongId();
     }
 
 }
