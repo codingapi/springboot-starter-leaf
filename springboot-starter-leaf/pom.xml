@@ -10,10 +10,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>springboot-starter-leaf</artifactId>
+    <version>0.0.1</version>
+
+    <name>springboot-starter-leaf</name>
+    <description>springboot-starter-leaf project for Spring Boot</description>
 
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <java.version>1.8</java.version>
     </properties>
 
     <dependencies>

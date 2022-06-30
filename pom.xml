@@ -19,8 +19,8 @@
     <artifactId>springboot-starter-leaf-parent</artifactId>
     <version>0.0.1</version>
 
-    <name>springboot-starter-leaf-parent</name>
-    <description>springboot-starter-leaf-parent project for Spring Boot</description>
+    <name>springboot-starter-leaf</name>
+    <description>springboot-starter-leaf project for Spring Boot</description>
     <url>https://gitlab.laiease.com/framework/springboot-starter-leaf</url>
 
 
@@ -189,11 +189,23 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
+
+            <modules>
+                <module>springboot-starter-leaf</module>
+                <module>leaf-demo</module>
+                <module>leaf-server</module>
+            </modules>
         </profile>
 
         <!-- mvn clean test -P travis-->
         <profile>
             <id>travis</id>
+
+            <modules>
+                <module>springboot-starter-leaf</module>
+                <module>leaf-demo</module>
+                <module>leaf-server</module>
+            </modules>
 
             <build>
                 <plugins>

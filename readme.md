@@ -1,3 +1,4 @@
+[![Build Status](https://app.travis-ci.com/codingapi/springboot-starter-leaf.svg?branch=main)](https://app.travis-ci.com/codingapi/springboot-starter-leaf)
 # springboot-starter-leaf
 
 ```xml
