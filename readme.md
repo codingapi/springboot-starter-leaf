@@ -14,7 +14,13 @@
 
 ## Tutorials
 
-### run leaf server
+### run leaf server (docker)
+
+```
+docker run -it -p 8080:8080 -d  leaf-server:v0.0.1 
+```
+
+### run leaf server(maven jdk) 
 
 * setting application.properties
 ```
@@ -32,7 +38,7 @@ leaf.snowflake.enable=false
 #leaf.snowflake.port=
 ```
 
-### run leaf demo  
+### run leaf demo 
 * setting application.properties
 
 ```
