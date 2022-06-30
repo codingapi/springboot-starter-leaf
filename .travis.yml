@@ -1,0 +1,21 @@
+language: java
+
+jdk: openjdk8
+
+branches:
+  only:
+    - main
+    - dev
+
+before_install:
+  - pip install --user codecov
+
+script:
+  - mvn clean test -P travis
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+env:
+  global:
+    - CODECOV_TOKEN=0dad7126-8cfc-4619-a153-8d2e27dc91aa
