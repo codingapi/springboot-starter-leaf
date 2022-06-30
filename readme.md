@@ -17,7 +17,7 @@
 ### run leaf server (docker)
 
 ```
-docker run -it -p 8080:8080 -d  leaf-server:v0.0.1 
+docker run -it -p 8080:8080 -d  codingapi4lorne/leaf-server:v0.0.1 
 ```
 
 ### run leaf server(maven jdk) 
